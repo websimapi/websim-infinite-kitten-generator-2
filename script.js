@@ -18,10 +18,16 @@ class KittenGenerator {
             "Sparkle", "Glitter", "Shimmer", "Twinkle", "Dazzle", "Glow", "Shine", "Bright"
         ];
         
+        // Audio system
+        this.audioContext = null;
+        this.sounds = [];
+        this.isAudioInitialized = false;
+        
         this.initializeElements();
         this.loadFromStorage();
         this.loadData();
         this.bindEvents();
+        this.initializeAudio();
     }
     
     initializeElements() {
@@ -34,6 +40,45 @@ class KittenGenerator {
         this.downloadBtn = document.getElementById('download-btn');
         this.currentIndexEl = document.getElementById('current-index');
         this.totalCatsEl = document.getElementById('total-cats');
+    }
+    
+    initializeAudio() {
+        // Preload all cat sounds
+        for (let i = 0; i < 10; i++) {
+            const audio = new Audio(`cat-sound-${i}.mp3`);
+            audio.preload = 'auto';
+            this.sounds.push(audio);
+        }
+    }
+    
+    async initAudioContext() {
+        if (!this.isAudioInitialized) {
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            this.isAudioInitialized = true;
+        }
+    }
+    
+    playCatSound(soundId) {
+        // Ensure we have sounds loaded
+        if (!this.sounds[soundId]) return;
+        
+        // Initialize audio context on first interaction
+        this.initAudioContext();
+        
+        // Stop any currently playing sound
+        this.sounds.forEach(sound => {
+            if (!sound.paused) {
+                sound.pause();
+                sound.currentTime = 0;
+            }
+        });
+        
+        // Play the new sound
+        try {
+            this.sounds[soundId].play();
+        } catch (error) {
+            console.error('Error playing cat sound:', error);
+        }
     }
     
     loadFromStorage() {
@@ -246,7 +291,9 @@ class KittenGenerator {
         try {
             const prompt = this.generateRandomPrompt();
             const name = this.generateUniqueName();
-            console.log('Generating kitten with name:', name, 'prompt:', prompt);
+            const soundId = Math.floor(Math.random() * 10); // Assign random sound ID 0-9
+            
+            console.log('Generating kitten with name:', name, 'sound ID:', soundId, 'prompt:', prompt);
             
             const result = await websim.imageGen({
                 prompt: prompt + ", high quality, detailed, adorable, photorealistic",
@@ -257,7 +304,8 @@ class KittenGenerator {
                 name: name,
                 url: result.url,
                 prompt: prompt,
-                timestamp: Date.now()
+                timestamp: Date.now(),
+                soundId: soundId // Add sound ID to cat data
             };
             
             this.catHistory.push(catData);
@@ -281,6 +329,9 @@ class KittenGenerator {
         this.catImage.src = catData.url;
         this.catPrompt.textContent = catData.prompt;
         this.catImage.classList.add('fade-in');
+        
+        // Add sound ID as data attribute for tap functionality
+        this.catImage.dataset.soundId = catData.soundId || 0;
         
         // Remove animation class after animation completes
         setTimeout(() => {
@@ -338,5 +389,13 @@ class KittenGenerator {
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new KittenGenerator();
+    const generator = new KittenGenerator();
+    
+    // Add tap event listener to cat image for sound
+    document.addEventListener('click', (e) => {
+        if (e.target.id === 'cat-image') {
+            const soundId = parseInt(e.target.dataset.soundId || '0');
+            generator.playCatSound(soundId);
+        }
+    });
 });
