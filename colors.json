@@ -1,0 +1,39 @@
+{
+  "solid_colors": [
+    "pure black", "jet black", "coal black", "midnight black", "ebony black",
+    "snow white", "pure white", "cream white", "ivory white", "pearl white",
+    "silver gray", "blue gray", "charcoal gray", "ash gray", "dove gray",
+    "ginger orange", "bright orange", "deep orange", "burnt orange", "copper orange",
+    "chocolate brown", "dark brown", "light brown", "cinnamon brown", "chestnut brown",
+    "cream colored", "buff colored", "champagne colored", "vanilla colored", "beige colored",
+    "golden colored", "honey colored", "amber colored", "caramel colored", "wheat colored"
+  ],
+  "pattern_colors": [
+    "orange tabby", "brown tabby", "silver tabby", "red tabby", "cream tabby",
+    "black and white tuxedo", "white and black bicolor", "gray and white bicolor",
+    "orange and white bicolor", "brown and white bicolor", "cream and white bicolor",
+    "tortoiseshell", "dilute tortoiseshell", "chocolate tortoiseshell", "blue tortoiseshell",
+    "calico", "dilute calico", "chocolate calico", "blue calico",
+    "seal point siamese", "chocolate point siamese", "blue point siamese", "lilac point siamese",
+    "flame point siamese", "cream point siamese", "tortie point siamese",
+    "silver smoke", "black smoke", "blue smoke", "chocolate smoke", "lilac smoke",
+    "silver shaded", "golden shaded", "cream shaded", "red shaded",
+    "silver chinchilla", "golden chinchilla", "blue chinchilla"
+  ],
+  "rare_colors": [
+    "lilac", "lavender", "fawn", "cinnamon", "chocolate", "blue-gray",
+    "blue cream", "lilac cream", "fawn cream", "cinnamon cream",
+    "silver patched tabby", "brown patched tabby", "blue patched tabby",
+    "chocolate patched tabby", "lilac patched tabby", "fawn patched tabby",
+    "red silver tabby", "cream silver tabby", "blue silver tabby",
+    "chocolate silver tabby", "lilac silver tabby", "fawn silver tabby"
+  ],
+  "descriptive_colors": [
+    "rust colored", "copper colored", "bronze colored", "mahogany colored",
+    "auburn colored", "apricot colored", "peach colored", "salmon colored",
+    "coral colored", "rose colored", "pink tinted", "lavender tinted",
+    "steel blue", "slate colored", "pewter colored", "platinum colored",
+    "sand colored", "taupe colored", "mushroom colored", "oyster colored",
+    "butter colored", "lemon colored", "mustard colored", "saffron colored"
+  ]
+}
