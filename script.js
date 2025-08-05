@@ -32,7 +32,6 @@ class KittenGenerator {
         this.backBtn = document.getElementById('back-btn');
         this.nextBtn = document.getElementById('next-btn');
         this.downloadBtn = document.getElementById('download-btn');
-        this.shareBtn = document.getElementById('share-btn');
         this.currentIndexEl = document.getElementById('current-index');
         this.totalCatsEl = document.getElementById('total-cats');
     }
@@ -323,33 +322,6 @@ class KittenGenerator {
         } catch (error) {
             console.error('Error downloading kitten:', error);
             alert('Failed to download kitten. Please try again!');
-        }
-    }
-    
-    async shareToComments() {
-        if (!this.catHistory[this.currentIndex]) return;
-        
-        try {
-            const catData = this.catHistory[this.currentIndex];
-            
-            const result = await window.websim.postComment({
-                content: `Check out this adorable generated kitten! 🐱\n\nPrompt: "${catData.prompt}"`,
-                images: [catData.url]
-            });
-            
-            if (result.error) {
-                alert('Failed to share cat: ' + result.error);
-            } else {
-                console.log('Cat shared to comments successfully');
-                // Show success feedback
-                this.shareBtn.textContent = '✅ Shared!';
-                setTimeout(() => {
-                    this.shareBtn.innerHTML = '💬 Share to Comments';
-                }, 2000);
-            }
-        } catch (error) {
-            console.error('Error sharing cat:', error);
-            alert('Failed to share cat to comments. Please try again!');
         }
     }
     
